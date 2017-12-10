@@ -3,7 +3,7 @@
 
 $script = <<SCRIPT
 mkdir -p /etc/ansible/roles
-ln -s /vagrant /etc/ansible/roles/test-role
+ln -f -s /vagrant /etc/ansible/roles/test-role
 SCRIPT
 
 Vagrant.configure("2") do |config|
