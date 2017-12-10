@@ -1,0 +1,7 @@
+---
+- file:
+    path: /var/www
+    owner: root
+    group: www-data
+    mode: 0774
+    recurse: yes

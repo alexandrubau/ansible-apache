@@ -1,0 +1,4 @@
+---
+_apache_service: apache2
+_apache_packages:
+  - apache2={{ apache_version }}

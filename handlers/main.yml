@@ -1,0 +1,8 @@
+---
+- name: Restart
+  include_tasks: handlers/restart.yml
+  listen: restart-apache
+
+- name: Permissions
+  include_tasks: handlers/permissions.yml
+  listen: permissions-apache
