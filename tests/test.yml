@@ -3,5 +3,5 @@
   become: yes
   become_user: root
   roles:
-    - test-role
+    - test
   # vars: 
