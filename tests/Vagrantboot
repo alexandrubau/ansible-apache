@@ -16,4 +16,4 @@ apt-add-repository -y -u ppa:ansible/ansible &>> $VLOG
 apt-get install -y ansible &>> $VLOG
 
 # Install role requirements
-ansible-galaxy install -f -p /etc/ansible/roles -r /etc/ansible/roles/test/requirements.yml &>> $VLOG
+#ansible-galaxy install -f -p /etc/ansible/roles -r /etc/ansible/roles/test/requirements.yml &>> $VLOG
