@@ -1,8 +1,7 @@
 ---
 - name: Install packages
   apt:
-    name: "{{ item }}"
-  with_items: "{{ _apache_packages }}"
+    name: "{{ _apache_packages }}"
 
 - name: Start service
   service:
