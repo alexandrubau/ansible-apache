@@ -9,6 +9,13 @@
     state: started
     enabled: yes
 
+- name: Enable modules
+  shell: a2enmod {{ item }}
+  register: _output
+  changed_when: "'Enabling module ' ~ item in _output.stdout"
+  with_items: "{{ apache_modules }}"
+  notify: restart-webserver
+
 - name: Add configs
   template:
     src: "{{ item.value }}"
@@ -23,27 +30,20 @@
   with_dict: "{{ apache_configs }}"
   notify: restart-webserver
 
-- name: Enable mods
-  shell: a2enmod {{ item }}
-  register: _output
-  changed_when: "'Enabling module ' ~ item in _output.stdout"
-  with_items: "{{ apache_mods }}"
-  notify: restart-webserver
-
-- name: Disable default vhost
+- name: Disable default site
   shell: a2dissite 000-default
   register: _output
   changed_when: "'Site 000-default disabled' in _output.stdout"
   notify: restart-webserver
 
-- name: Add vhosts
+- name: Add sites
   template:
     src: "{{ item.value }}"
     dest: /etc/apache2/sites-available/{{ item.key }}.conf
   with_dict: "{{ apache_sites }}"
   notify: restart-webserver
 
-- name: Enable vhosts
+- name: Enable sites
   shell: a2ensite {{ item.key }}
   register: _output
   changed_when: "'Enabling site ' ~ item.key in _output.stdout"
