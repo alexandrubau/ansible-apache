@@ -18,16 +18,16 @@
 
 - name: Add configs
   template:
-    src: "{{ item.value }}"
-    dest: /etc/apache2/conf-available/{{ item.key }}.conf
-  with_dict: "{{ apache_configs }}"
+    src: "{{ item.path }}"
+    dest: /etc/apache2/conf-available/{{ item.name }}.conf
+  with_items: "{{ apache_configs }}"
   notify: restart-webserver
 
 - name: Enable configs
-  shell: a2enconf {{ item.key }}
+  shell: a2enconf {{ item.name }}
   register: _output
-  changed_when: "'Enabling conf ' ~ item.key in _output.stdout"
-  with_dict: "{{ apache_configs }}"
+  changed_when: "'Enabling conf ' ~ item.name in _output.stdout"
+  with_items: "{{ apache_configs }}"
   notify: restart-webserver
 
 - name: Disable default site
@@ -38,15 +38,15 @@
 
 - name: Add sites
   template:
-    src: "{{ item.value }}"
-    dest: /etc/apache2/sites-available/{{ item.key }}.conf
-  with_dict: "{{ apache_sites }}"
+    src: "{{ item.path }}"
+    dest: /etc/apache2/sites-available/{{ item.name }}.conf
+  with_items: "{{ apache_sites }}"
   notify: restart-webserver
 
 - name: Enable sites
-  shell: a2ensite {{ item.key }}
+  shell: a2ensite {{ item.name }}
   register: _output
-  changed_when: "'Enabling site ' ~ item.key in _output.stdout"
-  with_dict: "{{ apache_sites }}"
+  changed_when: "'Enabling site ' ~ item.name in _output.stdout"
+  with_items: "{{ apache_sites }}"
   notify: restart-webserver
   

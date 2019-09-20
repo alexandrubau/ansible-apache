@@ -20,18 +20,20 @@ apache_modules:
   - headers
 ```
 
-**apache_configs** (type `object`, defalt `{}`)
+**apache_configs** (type `object`, defalt `[]`)
 
 Example:
 ```yaml
 apache_configs:
-  fqdn: /vagrant/templates/fqdn.conf.j2
+  - name: fqdn
+    path: /vagrant/templates/fqdn.conf.j2
 ```
 
-**apache_sites** (type `object`, default `{}`)
+**apache_sites** (type `object`, default `[]`)
 
 Example:
 ```yaml
 apache_sites:
-  athena: /vagrant/templates/athena.conf.j2
+  - name: athena
+    path: /vagrant/templates/athena.conf.j2
 ```
