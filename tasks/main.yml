@@ -3,12 +3,6 @@
   apt:
     name: "{{ _apache_packages }}"
 
-- name: Start service
-  service:
-    name: "{{ _apache_service }}"
-    state: started
-    enabled: yes
-
 - name: Enable modules
   shell: a2enmod {{ item }}
   register: _output
@@ -50,3 +44,8 @@
   with_items: "{{ apache_sites }}"
   notify: restart-webserver
   
+- name: Start service
+  service:
+    name: "{{ _apache_service }}"
+    state: started
+    enabled: yes
