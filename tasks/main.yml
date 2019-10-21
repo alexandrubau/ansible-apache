@@ -12,7 +12,7 @@
 
 - name: Add configs
   template:
-    src: "{{ item.path }}"
+    src: "{{ item.src }}"
     dest: /etc/apache2/conf-available/{{ item.name }}.conf
   with_items: "{{ apache_configs }}"
   notify: restart-webserver
@@ -32,7 +32,7 @@
 
 - name: Add sites
   template:
-    src: "{{ item.path }}"
+    src: "{{ item.src }}"
     dest: /etc/apache2/sites-available/{{ item.name }}.conf
   with_items: "{{ apache_sites }}"
   notify: restart-webserver
